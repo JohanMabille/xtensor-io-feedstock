@@ -7,7 +7,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/xtensor-stack/xtensor-io/archive/{{ version }}.tar.gz
+  url: https://github.com/xtensor-stack/xtensor-io/archive/${{ version }}.tar.gz
   sha256: 6aceb66e32a88eff58028443eacc1e73b6453d36c57eb4f2f13925356bbe5947
 
 build:
@@ -26,7 +26,7 @@ requirements:
   run:
     # xtensor is header-only
     # it doesn't have a run_exports section
-    - {{ pin_compatible('xtensor', max_pin='x.x') }}
+    - ${{ pin_compatible('xtensor', max_pin='x.x') }}
     - zlib
     - openimageio >=3.1,<4  # [not win]
     # The cmake of Highfive 2.2 and 2.3 does not properly export the libdeps target.
