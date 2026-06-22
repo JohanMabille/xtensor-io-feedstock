@@ -26,7 +26,7 @@ requirements:
   run:
     # xtensor is header-only
     # it doesn't have a run_exports section
-    - ${{ pin_compatible('xtensor', max_pin='x.x') }}
+    - ${{ pin_compatible('xtensor', upper_bound='x.x') }}
     - zlib
     - if: unix
       then:
