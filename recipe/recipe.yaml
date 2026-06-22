@@ -41,7 +41,7 @@ tests:
   - package_contents:
       files:
         exists:
-          - ${{ "Library/" if win }}include/xtensor-io.hpp
+          - ${{ "Library/" if win }}include/xtensor-io/xtensor-io.hpp
           - ${{ "Library/" if win }}lib/cmake/xtensor-io/xtensor-ioConfig.cmake
           - ${{ "Library/" if win }}lib/cmake/xtensor-io/xtensor-ioConfigVersion.cmake
 
