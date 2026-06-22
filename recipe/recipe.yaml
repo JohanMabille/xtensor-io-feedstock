@@ -1,0 +1,64 @@
+context:
+  version: "0.14.0"
+  build_number: 0
+
+package:
+  name: xtensor-io
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xtensor-stack/xtensor-io/archive/${{ version }}.tar.gz
+  sha256: 6aceb66e32a88eff58028443eacc1e73b6453d36c57eb4f2f13925356bbe5947
+
+build:
+  number: ${{ build_number }}
+
+requirements:
+  build:
+    - cmake
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - if: unix
+      then:
+        - make
+  host:
+    - xtensor >=0.26.0,<0.27
+  run:
+    # xtensor is header-only
+    # it doesn't have a run_exports section
+    - ${{ pin_compatible('xtensor', upper_bound='x.x') }}
+    - zlib
+    - if: unix
+      then:
+        - openimageio >=3.1,<4
+        - highfive >=3.3,<4
+    # The cmake of Highfive 2.2 and 2.3 does not properly export the libdeps target.
+    # cf. https://github.com/BlueBrain/HighFive/issues/394
+    - libsndfile >=1.2,<2
+    - blosc >=1.21,<2.0
+
+tests:
+  - package_contents:
+      files:
+        exists:
+          - ${{ "Library/" if win }}include/xtensor-io/xtensor-io.hpp
+          - ${{ "Library/" if win }}lib/cmake/xtensor-io/xtensor-ioConfig.cmake
+          - ${{ "Library/" if win }}lib/cmake/xtensor-io/xtensor-ioConfigVersion.cmake
+
+about:
+  homepage: https://github.com/xtensor-stack/xtensor-io
+  repository:  https://github.com/xtensor-stack/xtensor-io
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: Image/NPZ input/output for xtensor, the C++ tensor algebra library
+  description: This library enables loading of many image formats into xtensor/xarrays and NPZ.
+  documentation: http://xtensor-io.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - wolfv
+    - SylvainCorlay
+    - JohanMabille
+    - davidbrochart
+    - conda-forge/xtensor
