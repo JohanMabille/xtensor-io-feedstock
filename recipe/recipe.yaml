@@ -1,5 +1,5 @@
 context:
-  version: "0.14.0"
+  version: "0.15.0"
   build_number: 0
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/xtensor-stack/xtensor-io/archive/${{ version }}.tar.gz
-  sha256: 6aceb66e32a88eff58028443eacc1e73b6453d36c57eb4f2f13925356bbe5947
+  sha256: 8de6bbf58f79dce1ce56da6d79ac01d0f4110aa45d69ca39f40c1f557b55d488
 
 build:
   number: ${{ build_number }}
@@ -22,7 +22,7 @@ requirements:
       then:
         - make
   host:
-    - xtensor >=0.26.0,<0.27
+    - xtensor >=0.27.0,<0.28
   run:
     # xtensor is header-only
     # it doesn't have a run_exports section
